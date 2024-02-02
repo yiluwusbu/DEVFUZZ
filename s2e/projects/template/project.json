@@ -1,0 +1,47 @@
+{
+    "creation_time": "2020-10-27 01:27:48.891930",
+    "dynamically_linked": true,
+    "enable_pov_generation": false,
+    "guestfs_path": "<ENV_DIR>/s2e/images/debian-11.0.0-x86_64/guestfs",
+    "has_guestfs": true,
+    "image": "<ENV_DIR>/s2e/images/debian-11.0.0-x86_64",
+    "modelled_functions": [
+        "strcmp",
+        "strcpy",
+        "strncmp",
+        "memcpy",
+        "memcmp",
+        "strlen",
+        "strncpy",
+        "strcat"
+    ],
+    "modules": [
+        [
+            "bash",
+            false
+        ]
+    ],
+    "processes": [
+        "bash"
+    ],
+    "project_dir": "<ENV_DIR>/s2e/projects/bash",
+    "project_type": "linux",
+    "recipes_dir": "<ENV_DIR>/s2e/projects/bash/recipes",
+    "seeds_dir": "<ENV_DIR>/s2e/projects/bash/seeds",
+    "single_path": false,
+    "sym_args": [],
+    "target_arch": "x86_64",
+    "target_args": [],
+    "target_files": [
+        "/bin/bash"
+    ],
+    "target_path": "/bin/bash",
+    "use_cupa": true,
+    "use_fault_injection": false,
+    "use_recipes": false,
+    "use_seeds": false,
+    "use_symb_input_file": false,
+    "use_test_case_generator": true,
+    "warn_input_file": true,
+    "warn_seeds": true
+}

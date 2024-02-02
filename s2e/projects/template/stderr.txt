@@ -1,0 +1,100 @@
+[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['LuaBindings'].logLevel':
+    [string "return pluginsConfig['LuaBindings'].logLevel"]:1: attempt to index a nil value (field 'LuaBindings')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['LuaCoreEvents'].logLevel':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['LuaCoreEvents'].onStateForkDecide':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['LuaCoreEvents'].onStateKill':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['LuaCoreEvents'].onTimer':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['MultiSearcher'].logLevel':
+    [string "return pluginsConfig['MultiSearcher'].logLeve..."]:1: attempt to index a nil value (field 'MultiSearcher')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['ForkLimiter'].logLevel':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['KeyValueStore'].logLevel':
+    [string "return pluginsConfig['KeyValueStore'].logLeve..."]:1: attempt to index a nil value (field 'KeyValueStore')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['KeyValueStore'].server':
+    [string "return pluginsConfig['KeyValueStore'].server"]:1: attempt to index a nil value (field 'KeyValueStore')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['KeyValueStore'].port':
+    [string "return pluginsConfig['KeyValueStore'].port"]:1: attempt to index a nil value (field 'KeyValueStore')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['KeyValueStore'].type':
+    [string "return pluginsConfig['KeyValueStore'].type"]:1: attempt to index a nil value (field 'KeyValueStore')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['ExecutionTracer'].logLevel':
+    [string "return pluginsConfig['ExecutionTracer'].logLe..."]:1: attempt to index a nil value (field 'ExecutionTracer')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['WebServiceInterface'].logLevel':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWebServiceInterface[0m[31m: [0m[31mSeedSearcher not present, seed statistics will not be available
+[0m[31mWebServiceInterface[0m[31m: [0m[31mRecipe plugin not present, recipe statistics will not be available
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['Vmi'].logLevel':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['HostFiles'].logLevel':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['BaseInstructions'].logLevel':
+    [string "return pluginsConfig['BaseInstructions'].logL..."]:1: attempt to index a nil value (field 'BaseInstructions')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['BaseInstructions'].restrict':
+    [string "return pluginsConfig['BaseInstructions'].rest..."]:1: attempt to index a nil value (field 'BaseInstructions')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['LinuxMonitor'].logLevel':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['ModuleMap'].logLevel':
+    [string "return pluginsConfig['ModuleMap'].logLevel"]:1: attempt to index a nil value (field 'ModuleMap')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['ProcessExecutionDetector'].logLevel':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['MemoryMap'].logLevel':
+    [string "return pluginsConfig['MemoryMap'].logLevel"]:1: attempt to index a nil value (field 'MemoryMap')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['MemUtils'].logLevel':
+    [string "return pluginsConfig['MemUtils'].logLevel"]:1: attempt to index a nil value (field 'MemUtils')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['ModuleExecutionDetector'].trackExecution':
+    value of type nil can not be converted to boolean
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['StaticFunctionModels'].logLevel':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['StaticFunctionModels'].count':
+    value of type nil can not be converted to integer
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['TranslationBlockCoverage'].logLevel':
+    value of type nil can not be converted to string
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['TranslationBlockCoverage'].writeCoveragePeriod':
+    value of type nil can not be converted to integer
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['ModuleTracer'].logLevel':
+    [string "return pluginsConfig['ModuleTracer'].logLevel..."]:1: attempt to index a nil value (field 'ModuleTracer')
+[0m[31m
+[0m[31mWARNING: [0m[31mCannot get configuration value 'pluginsConfig['CorePlugin'].logLevel':
+    [string "return pluginsConfig['CorePlugin'].logLevel"]:1: attempt to index a nil value (field 'CorePlugin')
+[0m[31m
+[0m[31mError when querying [0m[31m./guestfs[0m[31m - [0m[31mNo such file or directory[0m[31m
+[0mqemu-system-x86_64: warning: host doesn't support requested feature: CPUID.40000001H:EAX.kvm-nopiodelay [bit 1]
+qemu-system-x86_64: warning: host doesn't support requested feature: CPUID.40000001H:EAX.kvmclock [bit 3]
+qemu-system-x86_64: warning: host doesn't support requested feature: CPUID.40000001H:EAX.kvm-asyncpf [bit 4]
+qemu-system-x86_64: warning: host doesn't support requested feature: CPUID.40000001H:EAX.kvm-steal-time [bit 5]
+qemu-system-x86_64: warning: host doesn't support requested feature: CPUID.40000001H:EAX.kvm-pv-eoi [bit 6]
+qemu-system-x86_64: warning: host doesn't support requested feature: CPUID.40000001H:EAX.kvmclock-stable-bit [bit 24]
+qemu-system-x86_64: Device 'ide0-hd0' does not have the requested snapshot 'ready'
+qemu-system-x86_64: terminating on signal 15 from pid 803154 (/usr/bin/python3)
+[31mTerminating node id [0m[31m0[0m[31m (instance slot [0m[31m0[0m[31m)
+[0m

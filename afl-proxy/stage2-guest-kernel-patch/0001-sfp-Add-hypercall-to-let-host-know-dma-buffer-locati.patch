@@ -1,0 +1,143 @@
+From 0feb9bc5d255fcdedc1705fe82f46e3d9f338bab Mon Sep 17 00:00:00 2001
+From: Tong Zhang <ztong0001@gmail.com>
+Date: Mon, 18 Apr 2022 21:30:00 -0700
+Subject: [PATCH] sfp:Add hypercall to let host know dma buffer location
+
+Add hypercall to let host know dma buffer allocation for the target
+device or dma buffer mapping information.
+This should be used with afl-proxy/stage2-dynamic-analysis, and the
+device must be located on PCI bus 0000:01:00.0.
+
+Signed-off-by: Tong Zhang <ztong0001@gmail.com>
+---
+ include/hcall.h             | 33 +++++++++++++++++++++++++++++++++
+ include/linux/dma-mapping.h | 34 ++++++++++++++++++++++++++++++----
+ 2 files changed, 63 insertions(+), 4 deletions(-)
+ create mode 100644 include/hcall.h
+
+diff --git a/include/hcall.h b/include/hcall.h
+new file mode 100644
+index 000000000000..f89a93943a38
+--- /dev/null
++++ b/include/hcall.h
+@@ -0,0 +1,33 @@
++///
++/// x86 hypercall
++/// Tong Zhang
++/// 2022 <ztong0001@gmail.com>
++///
++/// to record the call - use
++///     sudo perf record -e kvm:kvm_hypercall
++/// to dump the script - use
++///      qemu-system-x86  6642 [004]  6612.120883: kvm:kvm_hypercall: nr 0x0 a0
++///      0x1 a1 0x2 a2 0x3 a3 0x4
++///
++/// the hypercall is handled in host linux kernel arch/x86/kvm/x86.c
++///    int kvm_emulate_hypercall(struct kvm_vcpu* vcpu)
++///
++#ifndef _X86_HYPERCALL_H_
++#define _X86_HYPERCALL_H_
++
++//#include <stdint.h>
++#include <linux/types.h>
++
++static void x86_hyper_call(uint64_t a, uint64_t b, uint64_t c, uint64_t d,
++                           uint64_t s) {
++  asm volatile("mov %0,%%rax\n\r"
++               "mov %1,%%rbx\n\r"
++               "mov %2,%%rcx\n\r"
++               "mov %3,%%rdx\n\r"
++               "mov %4,%%rsi\n\r"
++               "vmcall \n\r" ::"r"(a),
++               "r"(b), "r"(c), "r"(d), "r"(s)
++               : "memory", "rax", "rbx", "rcx", "rdx", "rsi");
++}
++
++#endif
+diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
+index dca2b1355bb1..3931e48bd2c5 100644
+--- a/include/linux/dma-mapping.h
++++ b/include/linux/dma-mapping.h
+@@ -11,6 +11,8 @@
+ #include <linux/bug.h>
+ #include <linux/mem_encrypt.h>
+ 
++#include <hcall.h>
++
+ /**
+  * List of possible attributes associated with a DMA mapping. The semantics
+  * of each attribute should be defined in Documentation/core-api/dma-attributes.rst.
+@@ -322,13 +324,20 @@ static inline void dma_free_noncoherent(struct device *dev, size_t size,
+ static inline dma_addr_t dma_map_single_attrs(struct device *dev, void *ptr,
+ 		size_t size, enum dma_data_direction dir, unsigned long attrs)
+ {
++	dma_addr_t ret;
+ 	/* DMA must never operate on areas that might be remapped. */
+ 	if (dev_WARN_ONCE(dev, is_vmalloc_addr(ptr),
+ 			  "rejecting DMA map of vmalloc memory\n"))
+ 		return DMA_MAPPING_ERROR;
+ 	debug_dma_map_single(dev, ptr, size);
+-	return dma_map_page_attrs(dev, virt_to_page(ptr), offset_in_page(ptr),
++
++	ret = dma_map_page_attrs(dev, virt_to_page(ptr), offset_in_page(ptr),
+ 			size, dir, attrs);
++
++	if (strcmp(dev_name(dev), "0000:01:00.0")==0) {
++		x86_hyper_call(0,2,2,3,(uint64_t)ret);
++	}
++	return ret;
+ }
+ 
+ static inline void dma_unmap_single_attrs(struct device *dev, dma_addr_t addr,
+@@ -415,8 +424,12 @@ static inline void dma_sync_sgtable_for_device(struct device *dev,
+ static inline void *dma_alloc_coherent(struct device *dev, size_t size,
+ 		dma_addr_t *dma_handle, gfp_t gfp)
+ {
+-	return dma_alloc_attrs(dev, size, dma_handle, gfp,
++	void * ret = dma_alloc_attrs(dev, size, dma_handle, gfp,
+ 			(gfp & __GFP_NOWARN) ? DMA_ATTR_NO_WARN : 0);
++	if (strcmp(dev_name(dev), "0000:01:00.0")==0) {
++		x86_hyper_call(0,1,2,size,(uint64_t)*dma_handle);
++	}
++	return ret;
+ }
+ 
+ static inline void dma_free_coherent(struct device *dev, size_t size,
+@@ -549,19 +562,32 @@ static inline int dma_get_cache_alignment(void)
+ static inline void *dmam_alloc_coherent(struct device *dev, size_t size,
+ 		dma_addr_t *dma_handle, gfp_t gfp)
+ {
+-	return dmam_alloc_attrs(dev, size, dma_handle, gfp,
++	void* ret = dmam_alloc_attrs(dev, size, dma_handle, gfp,
+ 			(gfp & __GFP_NOWARN) ? DMA_ATTR_NO_WARN : 0);
++
++	if (strcmp(dev_name(dev), "0000:01:00.0")==0) {
++		x86_hyper_call(0,1,2,size,(uint64_t)*dma_handle);
++	}
++
++	return ret;
+ }
+ 
+ static inline void *dma_alloc_wc(struct device *dev, size_t size,
+ 				 dma_addr_t *dma_addr, gfp_t gfp)
+ {
+ 	unsigned long attrs = DMA_ATTR_WRITE_COMBINE;
++	void* ret;
+ 
+ 	if (gfp & __GFP_NOWARN)
+ 		attrs |= DMA_ATTR_NO_WARN;
+ 
+-	return dma_alloc_attrs(dev, size, dma_addr, gfp, attrs);
++	ret = dma_alloc_attrs(dev, size, dma_addr, gfp, attrs);
++
++	if (strcmp(dev_name(dev), "0000:01:00.0")==0) {
++		x86_hyper_call(0,1,2,size,(uint64_t)*dma_addr);
++	}
++
++	return ret;
+ }
+ 
+ static inline void dma_free_wc(struct device *dev, size_t size,
+-- 
+2.25.1
+

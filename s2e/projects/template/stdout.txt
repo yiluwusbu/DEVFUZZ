@@ -1,0 +1,75 @@
+Starting libs2e...
+Opening /dev/kvm
+Initializing qemu64-s2e cpu
+Using module /home/tong/s2e/install/share/libs2e/op_helper.bc.x86_64
+QMP client connecting to 127.0.0.1:50415
+S2E: output directory = "./s2e-out-1"
+lua: attempting to load models.lua
+Using log level override 'debug'
+Setting console level to 'debug'
+Adding CPU (addr = 0x7f8a4400a750, size = 0x36ea0)
+s2e-block: dirty sectors on close:0
+Creating plugin CorePlugin
+Creating plugin BaseInstructions
+Creating plugin HostFiles
+Creating plugin Vmi
+Creating plugin MemUtils
+Creating plugin WebServiceInterface
+Creating plugin ExecutionTracer
+Creating plugin ModuleTracer
+Creating plugin KeyValueStore
+Creating plugin TranslationBlockCoverage
+Creating plugin ModuleExecutionDetector
+Creating plugin ForkLimiter
+Creating plugin ProcessExecutionDetector
+Creating plugin ModuleMap
+Creating plugin MemoryMap
+Creating plugin MultiSearcher
+Creating plugin CUPASearcher
+Creating plugin StaticFunctionModels
+Creating plugin LinuxMonitor
+Creating plugin LuaBindings
+Creating plugin LuaCoreEvents
+Creating plugin PeX
+Initializing PeX
+PeX:  dmesg addr = 0x561854ef1b00 len= 0x561854ef1b30
+Initializing LuaBindings
+Initializing LuaCoreEvents
+LuaCoreEvents: Registering instrumentation for core signals
+Initializing MultiSearcher
+Initializing ForkLimiter
+Initializing KeyValueStore
+Initializing ExecutionTracer
+Initializing WebServiceInterface
+Initializing Vmi
+Vmi: adding path /home/tong/s2e/projects/3c59x
+Vmi: adding path /home/tong/s2e/images/debian-11.0.0-x86_64/guestfs
+Initializing HostFiles
+Initializing BaseInstructions
+Initializing LinuxMonitor
+Initializing ModuleMap
+Initializing ProcessExecutionDetector
+Initializing MemoryMap
+Initializing MemUtils
+Initializing ModuleExecutionDetector
+Initializing StaticFunctionModels
+StaticFunctionModels: Model count: 0
+Initializing CUPASearcher
+MultiSearcher: Registering CUPASearcher
+MultiSearcher: Switching to CUPASearcher
+CUPASearcher: CUPASearcher is now active
+Initializing TranslationBlockCoverage
+Initializing ModuleTracer
+Initializing CorePlugin
+0 [State 0] Created initial state
+Initializing periodic timer
+Adding memory block (startAddr = 0xffffffffffffffff, size = 0x10000000, hostAddr = 0x7f8a33e00000, isSharedConcrete=0, name=pc.ram)
+Adding memory block (startAddr = 0xffffffffffffffff, size = 0x40000, hostAddr = 0x7f8a26200000, isSharedConcrete=1, name=pc.bios)
+Adding memory block (startAddr = 0xffffffffffffffff, size = 0x20000, hostAddr = 0x7f8a25e00000, isSharedConcrete=1, name=pc.rom)
+Adding memory block (startAddr = 0xffffffffffffffff, size = 0x1000000, hostAddr = 0x7f8a24c00000, isSharedConcrete=1, name=vga.vram)
+Adding memory block (startAddr = 0xffffffffffffffff, size = 0x10000, hostAddr = 0x7f8a23a00000, isSharedConcrete=1, name=vga.rom)
+Adding memory block (startAddr = 0xffffffffffffffff, size = 0x40000, hostAddr = 0x7f8a23800000, isSharedConcrete=1, name=e1000.rom)
+Adding memory block (startAddr = 0xffffffffffffffff, size = 0x20000, hostAddr = 0x7f8a23400000, isSharedConcrete=1, name=/rom@etc/acpi/tables)
+Adding memory block (startAddr = 0xffffffffffffffff, size = 0x1000, hostAddr = 0x7f8a23200000, isSharedConcrete=1, name=/rom@etc/table-loader)
+Adding memory block (startAddr = 0xffffffffffffffff, size = 0x1000, hostAddr = 0x7f8a23000000, isSharedConcrete=1, name=/rom@etc/acpi/rsdp)
+Engine terminated.

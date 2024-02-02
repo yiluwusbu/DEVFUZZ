@@ -1,0 +1,82 @@
+#2016-2019 Tong Zhang <ztong@vt.edu>
+#2020-2021 Tong Zhang <ztong0001@gmail.com>
+
+TARGET_EXEC ?= a.out
+
+BUILD_DIR ?= ./build
+SRC_DIRS ?= ./
+
+SRCS := $(shell find $(SRC_DIRS) -name "*.cpp" -or -name "*.c" -or -name "*.s" -or -name "*.C" -or -name "*.CPP" -or -name "*.cc")
+OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+DEPS := $(OBJS:.o=.d)
+
+SPEC_FLAGS :=
+
+INC_DIRS := $(shell find $(SRC_DIRS) -type d)
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+
+CXXFLAGS := $(CXXFLAGS) $(INC_FLAGS) $(SPEC_FLAGS) 
+CFLAGS := $(CFLAGS) $(INC_FLAGS) $(SPEC_FLAGS) 
+
+LINK=$(CXX)
+
+$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
+	$(LINK) $(OBJS) -o $@ $(LDFLAGS)
+
+# assembly
+$(BUILD_DIR)/%.s.o: %.s
+	$(MKDIR_P) $(dir $@)
+	$(AS) $(ASFLAGS) -c $< -o $@
+
+# c source
+$(BUILD_DIR)/%.c.o: %.c
+	$(MKDIR_P) $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# c source
+$(BUILD_DIR)/%.C.o: %.C
+	$(MKDIR_P) $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+# c++ source
+$(BUILD_DIR)/%.cpp.o: %.cpp
+	$(MKDIR_P) $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# c++ source
+$(BUILD_DIR)/%.CPP.o: %.CPP
+	$(MKDIR_P) $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# c++ source
+$(BUILD_DIR)/%.cc.o: %.cc
+	$(MKDIR_P) $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+.PHONY: clean
+
+SCOPE_FILE = cscope.out
+TAG_FILE   = tags
+
+clean:
+	$(RM) -r $(BUILD_DIR) ${SCOPE_FILE} ${TAG_FILE} ${JUNK}
+
+-include $(DEPS)
+
+MKDIR_P ?= mkdir -p
+
+tags:
+	rm -f ${SCOPE_FILE} scope.* ${TAG_FILE}
+	find ${SRC_DIRS} -type f \
+    -a \( -name "*.h" -o -name "*.hpp" -o -name "*.cpp" -o -name "*.c" \
+    -o -name "*.cc" \) > ${SCOPE_FILE}
+	ctags -I "__THROW __nonnull __attribute_pure__ __attribute__ G_GNUC_PRINTF+" \
+		--file-scope=yes --c++-kinds=+px --c-kinds=+px --fields=+iaS -Ra --extra=+fq \
+		--langmap=c:.c.h.pc.ec --languages=c,c++ --links=yes \
+		-f ${TAG_FILE} -L ${SCOPE_FILE}
+	cscope -Rb -i ${SCOPE_FILE}
+
+indent:
+	clang-format -i -style=file `find $d -name '*.cpp' -or -name "*.h" -or -name "*.c" -or -name "*.cc"`
+

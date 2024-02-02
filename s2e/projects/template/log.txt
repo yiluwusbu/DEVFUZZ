@@ -1,0 +1,9 @@
+INFO: [s2e_env.server] Waiting for unfinished threads
+INFO: [s2e_env.server] Waiting for thread "RequestHandlingThread-0"
+[33mWARNING[0m: [[33mrun[0m] [33mGot signal 2, terminating S2E[0m
+[33mWARNING[0m: [[33mrun[0m] [33mSending SIGTERM to S2E process group[0m
+[33mWARNING[0m: [[33mrun[0m] [33mWaiting for S2E processes to quit...[0m
+INFO: [run] S2E terminated with code 0
+[33mWARNING[0m: [[33mrun[0m] [33mAll S2E processes terminated, exiting.[0m
+INFO: [s2e_env.server.coverage] Terminating coverage thread
+INFO: [s2e_env.server.stats] Terminating stats collection thread
