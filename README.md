@@ -130,6 +130,12 @@ sudo python3 ./tools/fuzz_probe.py -c 0 -s 0 -d e1000 -p 50 -m dma
 ```
 
 ## Build Device Model
+Before doing anything, you need to extract the prebuilt S2E Debian/Linux image to s2e/images folder
+### Initialization
+```
+cd s2e/projects
+./setup.sh
+```
 ### First Stage Model
 Create a S2E project
 ```
