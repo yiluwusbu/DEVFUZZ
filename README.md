@@ -158,6 +158,9 @@ sudo python3 <PROJ_ROOT>/tools/generate_postprobing_model.py --file <HWMODEL_xxx
 ### Insert Model into the Database
 go to **afl-proxy/aplib/hw_model.cpp** to register the devide model. Examples can be found in this file.
 
+## Collect Code Coverage
+We use gcov to collect code coverage. Please refer to [linux-gcov](https://github.com/yiluwusbu/DEVFUZZ/tree/master/afl-proxy/linux-gcov) for details.
+
 ## Cite
 
 ```
