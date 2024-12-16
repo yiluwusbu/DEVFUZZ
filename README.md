@@ -126,7 +126,7 @@ Example:
 ```
 # In two seperate terminals
 sudo python3 ./tools/launch-afl.py -s 0 -c 0
-sudo python3 ./tools/fuzz_probe.py -c 0 -s 0 -d e1000 -p 50 -m dma
+sudo python3 ./tools/fuzz.py -c 0 -s 0 -d e1000 -p 50 -m dma
 ```
 
 ## Build Device Model
